@@ -1,7 +1,9 @@
 # Camel Hello World
 
-## Goal
+## Goals
 
+- Discover how to bootstrap a Camel project
+- Verify that the [pre-requisites](../prerequisites/README.md) are met
 
 ## How this project has been created
 
@@ -28,14 +30,13 @@ src/data/message1.xml
 
 For a simple hello world, we can do a bit of cleanup:
 ```
-rm -rf src/data 
+rm -rf src/data
 ```
 
 Now, you should have a much smaller repository structure:
 ```
 $ find . -type f
 pom.xml
-src
 src/main/resources/log4j2.properties
 src/main/java/fr/itix/camel/hello_world_java/MainApp.java
 src/main/java/fr/itix/camel/hello_world_java/MyRouteBuilder.java
@@ -71,11 +72,11 @@ mvn exec:java
 If you followed the instructions, you should have something like this:
 ```
 [INFO] Scanning for projects...
-[INFO] 
+[INFO]
 [INFO] ------------------------------------------------------------------------
 [INFO] Building A Camel Route 1.0-SNAPSHOT
 [INFO] ------------------------------------------------------------------------
-[INFO] 
+[INFO]
 [INFO] --- exec-maven-plugin:1.6.0:java (default-cli) @ hello-world-java ---
 [ello_world_java.MainApp.main()] DefaultCamelContext            INFO  Apache Camel 2.21.1 (CamelContext: camel-1) is starting
 [ello_world_java.MainApp.main()] ManagedManagementStrategy      INFO  JMX is enabled
