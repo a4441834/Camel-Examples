@@ -43,7 +43,7 @@ src/main/java/fr/itix/camel/hello_world_java/MyRouteBuilder.java
 ```
 
 For a first "hello world" example, you can replace the content of `MyRouteBuilder.java` with:
-```
+```java
 package fr.itix.camel.hello_world_java;
 
 import org.apache.camel.builder.RouteBuilder;
