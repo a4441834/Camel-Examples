@@ -1,0 +1,6 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+  <route id="hello-world">
+    <from uri="timer:hello?period=1000"/>
+    <log message="Hello, world !" />
+  </route>
+</routes>
