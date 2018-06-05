@@ -16,7 +16,7 @@ mvn archetype:generate -DarchetypeGroupId=org.apache.camel.archetypes -Darchetyp
 
 By default, the `camel-archetype-spring-boot` archetype creates a sample route
 using the Java DSL. In this example, we will use the Spring DSL, so you can remove
-the two following classes:
+the following two classes:
 ```
 rm src/main/java/fr/itix/camel/spring_boot_packaging/MySpringBean.java
 rm src/main/java/fr/itix/camel/spring_boot_packaging/MySpringBootRouter.java
@@ -29,7 +29,7 @@ mkdir src/main/resources/camel/
 
 Create an `hello-world.xml` file in the newly created `camel` directory with
 this content:
-```
+```xml
 <routes xmlns="http://camel.apache.org/schema/spring">
   <route id="hello-world">
     <from uri="timer:hello?period=1000"/>
