@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+  <camelContext xmlns="http://camel.apache.org/schema/spring">
+
+    <!-- Our main Camel route that listen to HTTP requests and dispatch them
+      -- to other routes based on the method and path. -->
+    <route>
+      <!-- Listen to HTTP requests on port 8080, and accept requests on all paths
+        -- (this is the matchOnUriPrefix=true parameter). -->
+      <from uri="jetty:http://0.0.0.0:8080?matchOnUriPrefix=true"/>
+
+      <!-- Generate an access log (method + path) for debugging purposes. -->
+      <log message="${in.header.CamelHttpMethod} /${in.header.CamelHttpPath}" />
+
+      <!-- Since all responses will be JSON, we can already set the Content-Type. -->
+      <setHeader headerName="Content-Type">
+        <constant>application/json</constant>
+      </setHeader>
+
+      <!-- Dispatch the requests to other camel routes. -->
+      <choice>
+        <when>
+          <simple>${in.header.CamelHttpMethod} == 'GET'</simple>
+
+          <!-- Dispatch all GET requests, based on the path. -->
+          <choice>
+            <!-- Note: the path does NOT include the first '/' ! -->
+            <when>
+              <!-- GET / -->
+              <simple>${in.header.CamelHttpPath} == ''</simple>
+              <to uri="direct:get_metadata"/>
+            </when>
+            <when>
+              <!-- GET /users/nmasse-itix -->
+              <simple>${in.header.CamelHttpPath} == 'users/nmasse-itix'</simple>
+              <to uri="direct:get_users_nmasse_itix"/>
+            </when>
+            <when>
+              <!-- GET /users/lbroudoux -->
+              <simple>${in.header.CamelHttpPath} == 'users/lbroudoux'</simple>
+              <to uri="direct:get_users_lbroudoux"/>
+            </when>
+            <when>
+              <!-- GET /orgs/microcks -->
+              <simple>${in.header.CamelHttpPath} == 'orgs/microcks'</simple>
+              <to uri="direct:get_orgs_microcks"/>
+            </when>
+
+            <!-- If path does not match, return a 404 error. -->
+            <otherwise>
+                <to uri="direct:not_found"/>
+            </otherwise>
+          </choice>
+        </when>
+
+        <!-- If method does not match, return a 404 error. -->
+        <otherwise>
+            <to uri="direct:not_found"/>
+        </otherwise>
+      </choice>
+    </route>
+
+    <!-- GET /orgs/microcks -->
+    <route>
+      <from uri="direct:get_orgs_microcks"/>
+      <setBody>
+        <constant><![CDATA[{
+  "login": "microcks",
+  "id": 11051048,
+  "description": "",
+  "name": "Microcks",
+  "blog": "http://microcks.github.io",
+  "type": "Organization"
+}
+]]></constant>
+      </setBody>
+    </route>
+
+    <!-- GET /users/nmasse-itix -->
+    <route>
+      <from uri="direct:get_users_nmasse_itix"/>
+      <setBody>
+        <constant><![CDATA[{
+  "login": "nmasse-itix",
+  "id": 7472564,
+  "type": "User",
+  "site_admin": false,
+  "name": "Nicolas MASSE"
+}]]></constant>
+      </setBody>
+    </route>
+
+    <!-- GET /users/lbroudoux -->
+    <route>
+      <from uri="direct:get_users_lbroudoux"/>
+      <setBody>
+        <constant><![CDATA[{
+  "login": "lbroudoux",
+  "id": 1538635,
+  "type": "User",
+  "site_admin": false,
+  "name": "Laurent Broudoux"
+}]]></constant>
+      </setBody>
+    </route>
+
+    <!-- GET / -->
+    <route>
+      <from uri="direct:get_metadata"/>
+      <setBody>
+        <constant><![CDATA[{
+  "organization_url": "https://api.github.com/orgs/{org}",
+  "user_url": "https://api.github.com/users/{user}"
+}]]></constant>
+      </setBody>
+    </route>
+
+    <!-- 404 Not Found -->
+    <route>
+      <from uri="direct:not_found"/>
+      <setHeader headerName="CamelHttpResponseCode">
+        <constant>404</constant>
+      </setHeader>
+      <setBody>
+        <constant><![CDATA[{
+  "message": "Not Found",
+  "documentation_url": "https://developer.github.com/v3"
+}]]></constant>
+      </setBody>
+    </route>
+  </camelContext>
+</beans>
