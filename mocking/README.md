@@ -137,3 +137,4 @@ Note: you will have to press Ctrl-C to exit this example!
 - [Simple Expressions Syntax](http://camel.apache.org/simple.html)
 - [Constant Syntax](http://camel.apache.org/constant.html)
 - [The Log EIP](http://camel.apache.org/logeip.html)
+- [The Content Based Router EIP](http://camel.apache.org/content-based-router.html)
