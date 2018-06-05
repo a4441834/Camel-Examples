@@ -15,11 +15,20 @@ Java(TM) SE Runtime Environment (build 1.8.0_131-b11)
 Java HotSpot(TM) 64-Bit Server VM (build 25.131-b11, mixed mode)
 ```
 
+### On MacOS
+
 If you do not have Java installed, on MacOS you can use [Brew](https://brew.sh/) to install Java:
 ```
 brew tap caskroom/versions
 brew cask install java8
 ```
+
+If you also have Java 10 installed, you can remove it using:
+```
+brew cask remove java
+```
+
+### On Fedora/CentOS/RHEL
 
 If you have a Fedora/CentOS/RHEL, you can install OpenJDK:
 ```
