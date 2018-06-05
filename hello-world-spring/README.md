@@ -6,7 +6,7 @@
 
 ## How this project has been created
 
-Generate a new Maven project using the `camel-archetype-java` archetype:
+Generate a new Maven project using the `camel-archetype-spring` archetype:
 ```
 mvn archetype:generate -DarchetypeGroupId=org.apache.camel.archetypes -DarchetypeArtifactId=camel-archetype-spring -DarchetypeVersion=2.21.1 -DinteractiveMode=false -DgroupId=fr.itix.camel-examples -DartifactId=hello-world-spring -Dversion=1.0-SNAPSHOT -Dpackage=fr.itix.camel.hello_world_spring
 ```
