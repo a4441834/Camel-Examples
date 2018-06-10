@@ -23,7 +23,7 @@ $ /usr/libexec/java_home -v 1.8
 /Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home
 ```
 
-Then, open $HOME/.vscode/settings.json and add the path to your Java Home in front of the key `xmlLang.javaHome`:
+Then, open `$HOME/.vscode/settings.json` and add the path to your Java Home in front of the key `xmlLang.javaHome`:
 
 ```js
 {
@@ -36,4 +36,3 @@ Restart Visual Studio Code.
 ## References
 
 - [Java Support in VS Code](https://code.visualstudio.com/docs/languages/java)
-
