@@ -25,7 +25,7 @@ $ /usr/libexec/java_home -v 1.8
 
 Then, open $HOME/.vscode/settings.json and add the path to your Java Home in front of the key `xmlLang.javaHome`:
 
-````js
+```js
 {
   "xmlLang.javaHome": "/Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home"
 }
