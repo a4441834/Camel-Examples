@@ -7,6 +7,8 @@ Then, install the required extensions to develop Java:
 - Install [Java Extension Pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
 - Install [Spring Boot support](https://marketplace.visualstudio.com/items?itemName=Pivotal.vscode-spring-boot)
 
+Install the [Camel Language Support](https://marketplace.visualstudio.com/items?itemName=camel-tooling.vscode-apache-camel).
+
 Install required extensions to edit XML files:
 
 - Install [DotJoshJohnson XML Tools](https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml) to enable XPath / XQuery support.
@@ -36,3 +38,4 @@ Restart Visual Studio Code.
 ## References
 
 - [Java Support in VS Code](https://code.visualstudio.com/docs/languages/java)
+- [Using VS Code to develop Spring Boot-based Camel and Red Hat Fuse projects](https://developers.redhat.com/blog/2019/01/24/vscode-camel-red-hat-fuse/)
